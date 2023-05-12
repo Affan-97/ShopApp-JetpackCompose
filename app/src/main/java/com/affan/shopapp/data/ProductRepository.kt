@@ -20,7 +20,11 @@ class ProductRepository {
     fun getAllProduct(): Flow<List<Product>> {
         return flowOf(products)
     }
-
+    fun getDetail(itemId: Int): Product {
+        return products.first {
+            it.id == itemId
+        }
+    }
     companion object {
         @Volatile
         private var instance: ProductRepository? = null

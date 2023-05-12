@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ShopApp</string>
+    <string name="detail_title">Product Detail</string>
+    <string name="stock">inStock</string>
 </resources>
