@@ -1,7 +1,6 @@
 package com.affan.shopapp.ui.screen.cart
 
 import android.annotation.SuppressLint
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -61,7 +60,8 @@ fun CartScreen(
                     deleteItem = { id -> viewModel.deleteProduct(id) },
                     onProductCountChanged = { id, qty ->
                         viewModel.updateOrderReward(id, qty)
-                    }
+                    },
+                    viewModel = viewModel
                 )
             }
 
@@ -75,6 +75,7 @@ fun CartScreen(
 @Composable
 fun CartContent(
     state: CartState,
+    viewModel: CartViewModel,
     modifier: Modifier = Modifier,
     navigateDetail: (Int) -> Unit,
     deleteItem: (Int) -> Unit,
@@ -134,13 +135,23 @@ fun CartContent(
                 }
 
             }
-            Column(verticalArrangement = Arrangement.spacedBy(16.dp), modifier = modifier.shadow(1.dp).padding( 16.dp) ) {
-                Row(modifier = modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+            Column(
+                verticalArrangement = Arrangement.spacedBy(16.dp),
+                modifier = modifier
+                    .shadow(1.dp)
+                    .padding(16.dp)
+            ) {
+                Row(
+                    modifier = modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
                     Text(text = stringResource(R.string.total_price))
                     Text(text = convertCurency(state.totalPrice), fontWeight = FontWeight.Bold)
                 }
-            OrderButton(text =" Beli Sekarang") {
-            }
+                OrderButton(
+                    text = " Beli Sekarang",
+                    onClick = { viewModel.BoughtItem(state.listCartItem, state.totalPrice) }
+                )
 
             }
         }

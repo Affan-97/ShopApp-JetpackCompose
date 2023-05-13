@@ -7,4 +7,7 @@
     <string name="beli">Beli</string>
     <string name="total_price">Total Harga</string>
     <string name="cart_hint">Cart Button</string>
+    <string name="total_order">%s item</string>
+    <string name="transaction_numb">Transaksi %d</string>
+    <string name="transaction">Transaction</string>
 </resources>

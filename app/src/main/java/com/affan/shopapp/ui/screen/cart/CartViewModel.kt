@@ -8,32 +8,26 @@ import com.affan.shopapp.model.CartItem
 import com.affan.shopapp.model.CartState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 
 class CartViewModel(
     private val repository: ProductRepository
 ) : ViewModel() {
 
-    private val _cartState: MutableStateFlow<UiState<List<CartItem>>> =
-        MutableStateFlow(UiState.Loading)
-    val cartState: StateFlow<UiState<List<CartItem>>>
-        get() = _cartState
 
     private val _uiState: MutableStateFlow<UiState<CartState>> = MutableStateFlow(UiState.Loading)
     val uiState: StateFlow<UiState<CartState>>
         get() = _uiState
 
-    fun getCart() {
+    fun BoughtItem(Items: List<CartItem>, total: Int) {
         viewModelScope.launch {
-            repository.getCarts().catch {
-                _cartState.value = UiState.Error(it.message.toString())
-            }.collect {
-                _cartState.value = UiState.Success(it)
+            repository.BoughtItem(Items, total).collect{
+                if (it){
+                    getAddedCart()
+                }
             }
         }
     }
-
 
     fun getAddedCart() {
         viewModelScope.launch {

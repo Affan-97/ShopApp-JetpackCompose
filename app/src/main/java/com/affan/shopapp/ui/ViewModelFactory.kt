@@ -6,6 +6,7 @@ import com.affan.shopapp.data.ProductRepository
 import com.affan.shopapp.ui.screen.cart.CartViewModel
 import com.affan.shopapp.ui.screen.detail.DetailViewModel
 import com.affan.shopapp.ui.screen.home.HomeViewModel
+import com.affan.shopapp.ui.screen.order.OrderViewModel
 
 class ViewModelFactory(private val repository: ProductRepository) :
     ViewModelProvider.NewInstanceFactory() {
@@ -20,6 +21,9 @@ class ViewModelFactory(private val repository: ProductRepository) :
         }
         if (modelClass.isAssignableFrom(CartViewModel::class.java)) {
             return CartViewModel(repository) as T
+        }
+        if (modelClass.isAssignableFrom(OrderViewModel::class.java)) {
+            return OrderViewModel(repository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
     }

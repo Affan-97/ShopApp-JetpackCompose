@@ -20,6 +20,7 @@ import com.affan.shopapp.ui.screen.Screen
 import com.affan.shopapp.ui.screen.cart.CartScreen
 import com.affan.shopapp.ui.screen.detail.DetailScreen
 import com.affan.shopapp.ui.screen.home.HomeScreen
+import com.affan.shopapp.ui.screen.order.OrderScreen
 import com.affan.shopapp.ui.screen.profile.ProfileScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -34,7 +35,7 @@ fun ShopApp(
 
 
     Scaffold(bottomBar = {
-        if (currentRoute != Screen.Detail.routes) {
+        if (currentRoute != Screen.Detail.routes || currentRoute!=Screen.Cart.routes) {
             BottomBar(navController = navController)
         }
     }) { paddingValues ->
@@ -66,6 +67,10 @@ fun ShopApp(
             }
             composable(Screen.Profile.routes) {
                 ProfileScreen()
+            }
+
+            composable(Screen.Transaction.routes) {
+                OrderScreen()
             }
             composable(
                 Screen.Detail.routes,

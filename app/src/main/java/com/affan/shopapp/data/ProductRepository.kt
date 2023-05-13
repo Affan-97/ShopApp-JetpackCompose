@@ -3,6 +3,7 @@ package com.affan.shopapp.data
 import android.util.Log
 import com.affan.shopapp.model.CartItem
 import com.affan.shopapp.model.FakeDataSource
+import com.affan.shopapp.model.OrderItem
 import com.affan.shopapp.model.Product
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
@@ -12,6 +13,7 @@ import kotlinx.coroutines.flow.map
 class ProductRepository {
     private val products = mutableListOf<Product>()
     private val carts = mutableListOf<CartItem>()
+    private val orders = mutableListOf<OrderItem>()
 
     init {
         if (products.isEmpty()) {
@@ -98,6 +100,17 @@ class ProductRepository {
         return flowOf(products.filter {
             it.name.contains(query, ignoreCase = true)
         })
+    }
+
+    fun BoughtItem(Items: List<CartItem>, total: Int): Flow<Boolean> {
+        orders.add(OrderItem(Items, total))
+        carts.clear()
+
+        return flowOf(true)
+    }
+
+    fun getOrders(): Flow<List<OrderItem>> {
+        return flowOf(orders)
     }
 
     companion object {
