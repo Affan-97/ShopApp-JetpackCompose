@@ -51,7 +51,9 @@ fun ShopApp(
             }
             composable(Screen.Cart.routes) {
                 val context = LocalContext.current
-                CartScreen()
+                CartScreen( navigateBack = {
+                    navController.navigateUp()
+                })
             }
             composable(Screen.Profile.routes) {
                 ProfileScreen()

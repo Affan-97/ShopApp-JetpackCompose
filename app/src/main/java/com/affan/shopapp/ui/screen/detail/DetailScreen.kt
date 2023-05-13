@@ -167,7 +167,7 @@ fun DetailContent(
                 qty = qty,
                 image = image,
                 onAddToCart = onAddToCart
-            )//Create a sheet Composable
+            )
         }) {
 
         Box(modifier = Modifier.padding(padding)) {
@@ -234,66 +234,3 @@ fun DetailContent(
     }
 }
 
-
-@Composable
-fun ProductCounter(
-    orderId: Long,
-    orderCount: Int,
-    onProductIncreased: (Long) -> Unit,
-    onProductDecreased: (Long) -> Unit,
-    modifier: Modifier = Modifier
-) {
-    Row(
-        horizontalArrangement = Arrangement.Center,
-        verticalAlignment = Alignment.CenterVertically,
-        modifier = modifier
-            .size(width = 110.dp, height = 40.dp)
-            .padding(4.dp)
-    ) {
-        Surface(
-            shape = RoundedCornerShape(size = 5.dp),
-            border = BorderStroke(1.dp, MaterialTheme.colorScheme.primary),
-            color = Color.Transparent,
-            contentColor = MaterialTheme.colorScheme.primary,
-            modifier = Modifier.size(30.dp)
-        ) {
-            Text(
-                text = "—",
-                fontSize = 22.sp,
-                textAlign = TextAlign.Center,
-                modifier = Modifier
-                    .weight(1f)
-                    .clickable {
-                        onProductDecreased(orderId)
-                    }
-            )
-        }
-        Text(
-            text = orderCount.toString(),
-            modifier = Modifier
-                .weight(1f)
-                .testTag("count"),
-            fontSize = 20.sp,
-            textAlign = TextAlign.Center,
-            fontWeight = FontWeight.Bold
-        )
-        Surface(
-            shape = RoundedCornerShape(size = 5.dp),
-            border = BorderStroke(1.dp, MaterialTheme.colorScheme.primary),
-            color = Color.Transparent,
-            contentColor = MaterialTheme.colorScheme.primary,
-            modifier = Modifier.size(30.dp)
-        ) {
-            Text(
-                text = "＋",
-                fontSize = 22.sp,
-                textAlign = TextAlign.Center,
-                modifier = Modifier
-                    .weight(1f)
-                    .clickable {
-                        onProductIncreased(orderId)
-                    }
-            )
-        }
-    }
-}

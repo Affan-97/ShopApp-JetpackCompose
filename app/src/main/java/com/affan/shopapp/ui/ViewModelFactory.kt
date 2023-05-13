@@ -3,6 +3,7 @@ package com.affan.shopapp.ui
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.affan.shopapp.data.ProductRepository
+import com.affan.shopapp.ui.screen.cart.CartViewModel
 import com.affan.shopapp.ui.screen.detail.DetailViewModel
 import com.affan.shopapp.ui.screen.home.HomeViewModel
 
@@ -16,6 +17,9 @@ class ViewModelFactory(private val repository: ProductRepository) :
         }
         if (modelClass.isAssignableFrom(DetailViewModel::class.java)) {
             return DetailViewModel(repository) as T
+        }
+        if (modelClass.isAssignableFrom(CartViewModel::class.java)) {
+            return CartViewModel(repository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
     }

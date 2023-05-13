@@ -33,7 +33,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.affan.shopapp.R
-import com.affan.shopapp.ui.screen.detail.ProductCounter
+
 import com.affan.shopapp.ui.theme.ShopAppTheme
 import com.affan.shopapp.utils.convertCurency
 

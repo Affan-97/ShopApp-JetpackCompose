@@ -6,6 +6,7 @@ import com.affan.shopapp.model.FakeDataSource
 import com.affan.shopapp.model.Product
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.map
 
 
 class ProductRepository {
@@ -34,6 +35,15 @@ class ProductRepository {
         return flowOf(carts)
     }
 
+    fun getAddedCart(): Flow<List<CartItem>> {
+        return getCarts().map { orderRewards ->
+            orderRewards.filter { orderReward ->
+                orderReward.qty != 0
+            }
+        }
+
+    }
+
     fun addToCart(item: Product, qty: Int): Flow<Boolean> {
 
         val index = carts.indexOfFirst { it.item == item }
@@ -54,6 +64,33 @@ class ProductRepository {
         }
 
 
+        return flowOf(result)
+    }
+
+    fun updateOrderReward(id: Int, qty: Int): Flow<Boolean> {
+        val index = carts.indexOfFirst { it.item.id == id }
+        val result = if (index >= 0) {
+            val cart = carts[index]
+            carts[index] =
+                cart.copy(item = cart.item, qty = qty)
+            Log.d("TAG", "addToCart: save")
+            true
+        } else {
+            false
+        }
+        Log.d("TAG", "updateOrderReward: $result")
+        return flowOf(result)
+    }
+
+    fun deleteItem(id: Int): Flow<Boolean> {
+        val index = carts.indexOfFirst { it.item.id == id }
+        val result = if (index >= 0) {
+            carts.removeAt(index)
+            true
+        } else {
+            false
+        }
+        Log.d("TAG", "updateOrderReward: $result")
         return flowOf(result)
     }
 

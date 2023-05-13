@@ -53,17 +53,4 @@ fun ItemList(
         }
     }
 }
-/*
 
-@Preview(showBackground = true)
-@Composable
-fun ItemPrev() {
-    ShopAppTheme() {
-        ItemList(
-            "Buah",
-            "5000",
-            "https://www.applesfromny.com/wp-content/uploads/2020/05/20Ounce_NYAS-Apples2.png"
-       , navigateDetail = {}
-        )
-    }
-}*/
