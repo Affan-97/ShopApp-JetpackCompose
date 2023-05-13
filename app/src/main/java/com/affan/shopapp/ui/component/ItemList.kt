@@ -15,16 +15,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import com.affan.shopapp.ui.theme.ShopAppTheme
+import com.affan.shopapp.utils.convertCurency
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ItemList(
     title: String,
-    price: String,
+    price: Int,
     imageUrl: String,
     id: Int,
     navigateDetail: (Int) -> Unit,
@@ -33,22 +34,23 @@ fun ItemList(
 
 
     Card(
-        onClick = { navigateDetail(id) } ,
-        colors = CardDefaults.cardColors(containerColor = Color.Cyan),
+        onClick = { navigateDetail(id) },
+        colors = CardDefaults.cardColors(containerColor = Color.White),
         shape = MaterialTheme.shapes.medium,
+        elevation = CardDefaults.cardElevation(10.dp),
         modifier = Modifier.padding(vertical = 4.dp, horizontal = 8.dp)
     ) {
         Row(
             modifier = Modifier
-                .padding(8.dp)
+                .padding(vertical = 8.dp, horizontal = 16.dp)
                 .fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceEvenly
+            horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            AsyncImage(model = imageUrl, contentDescription = null, modifier = Modifier.size(40.dp))
-            Column() {
-                Text(text = title)
-                Text(text = price)
+            AsyncImage(model = imageUrl, contentDescription = null, modifier = Modifier.size(80.dp))
+            Column(modifier=modifier.fillMaxWidth(), horizontalAlignment = Alignment.End, verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                Text(text = title, fontWeight = FontWeight.Bold, fontSize = 18.sp)
+                Text(text = convertCurency(price),fontSize = 14.sp)
             }
         }
     }

@@ -2,8 +2,10 @@ package com.affan.shopapp.ui.screen.home
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
@@ -16,6 +18,7 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.ShoppingCart
+import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.Badge
 import androidx.compose.material3.BadgedBox
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -132,6 +135,7 @@ fun HomeContent(
             }
         }
     }) {
+        if (order.isNotEmpty()){
         LazyColumn(
 
             contentPadding = PaddingValues(16.dp),
@@ -143,11 +147,17 @@ fun HomeContent(
                 ItemList(
                     imageUrl = data.image,
                     title = data.name,
-                    price = data.price.toString(),
+                    price = data.price,
                     id = data.id,
                     navigateDetail = { navigateDetail(data.id) },
                     modifier = modifier
                 )
+            }
+        }
+        }else {
+            Column(modifier = modifier.fillMaxSize(), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
+                Icon(imageVector = Icons.Default.Warning , contentDescription = stringResource(R.string.warning_icon))
+                Text(text = "Belum Ada Transaksi")
             }
         }
     }

@@ -3,19 +3,16 @@ package com.affan.shopapp.ui.screen.order
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.heightIn
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -67,31 +64,48 @@ fun OrderContent(
     modifier: Modifier
 ) {
     Scaffold(topBar = {
-        Row(modifier = Modifier.shadow(1.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Center) {
+        Row(
+            modifier = Modifier.shadow(1.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center
+        ) {
 
-                Text(
-                    text = stringResource(R.string.transaction),
-                    textAlign = TextAlign.Center,
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 20.sp,
-                    modifier = Modifier
-                        .fillMaxWidth().padding(32.dp)
+            Text(
+                text = stringResource(R.string.transaction),
+                textAlign = TextAlign.Center,
+                fontWeight = FontWeight.Bold,
+                fontSize = 20.sp,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(32.dp)
 
-                )
+            )
 
             Divider(modifier = Modifier.shadow(1.dp))
         }
     }) { values ->
-        LazyColumn(modifier = modifier.padding(values).padding(16.dp)) {
+        if (list.isNotEmpty()) {
+            LazyColumn(
+                modifier = modifier
+                    .padding(values)
+                    .padding(16.dp)
+            ) {
 
-            items(list) {
-                OrderList(
-                    index = (list.indexOf(it) + 1),
-                    item = it.listOrderItem.size.toString(),
-                    total = it.totalPrice
-                )
+                items(list) {
+                    OrderList(
+                        index = (list.indexOf(it) + 1),
+                        item = it.listOrderItem.size.toString(),
+                        total = it.totalPrice
+                    )
+                }
+
+
             }
-
+        } else {
+            Column(modifier = modifier.fillMaxSize(), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
+    Icon(imageVector = Icons.Default.Warning , contentDescription = stringResource(R.string.warning_icon))
+                Text(text = "Belum Ada Transaksi")
+            }
         }
     }
 }

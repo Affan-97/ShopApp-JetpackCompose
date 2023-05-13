@@ -10,4 +10,7 @@
     <string name="total_order">%s item</string>
     <string name="transaction_numb">Transaksi %d</string>
     <string name="transaction">Transaction</string>
+    <string name="Name">Affan Abdullah Izzuddin</string>
+    <string name="email">affana959@gmail.com</string>
+    <string name="warning_icon">Warning Icon</string>
 </resources>
