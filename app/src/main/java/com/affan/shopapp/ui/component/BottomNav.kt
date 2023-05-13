@@ -12,11 +12,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material.icons.outlined.AccountCircle
+import androidx.compose.material.icons.outlined.DateRange
 import androidx.compose.material.icons.outlined.Home
-import androidx.compose.material.icons.outlined.ShoppingCart
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -45,11 +45,12 @@ fun BottomBar(navController: NavHostController) {
             screen = Screen.Home
         ),
         NavItem(
-            title = "Cart",
-            icon = Icons.Default.ShoppingCart,
-            icon_focused = Icons.Outlined.ShoppingCart,
-            screen = Screen.Cart
+            title = "Transaction",
+            icon = Icons.Default.DateRange,
+            icon_focused = Icons.Outlined.DateRange,
+            screen = Screen.Transaction
         ),
+
         NavItem(
             title = "Profile",
             icon = Icons.Default.AccountCircle,

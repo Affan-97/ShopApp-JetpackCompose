@@ -44,7 +44,7 @@ fun CartScreen(
     viewModel: CartViewModel = androidx.lifecycle.viewmodel.compose.viewModel(
         factory = ViewModelFactory(Injection.provideRepository())
     ),
-    navigateBack: () -> Unit
+    navigateBack: () -> Unit,
 ) {
 
     viewModel.uiState.collectAsState(initial = UiState.Loading).value.let { uiState ->

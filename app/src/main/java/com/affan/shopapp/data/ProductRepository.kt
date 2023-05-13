@@ -94,6 +94,12 @@ class ProductRepository {
         return flowOf(result)
     }
 
+    fun searchProduct(query: String): Flow<List<Product>> {
+        return flowOf(products.filter {
+            it.name.contains(query, ignoreCase = true)
+        })
+    }
+
     companion object {
         @Volatile
         private var instance: ProductRepository? = null

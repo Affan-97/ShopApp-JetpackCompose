@@ -47,10 +47,19 @@ fun ShopApp(
             composable(Screen.Home.routes) {
                 HomeScreen(navigateDetail = {
                     navController.navigate(Screen.Detail.createRoute(it))
+                }, navigateToCart = {
+
+                    navController.navigate(Screen.Cart.routes) {
+                        popUpTo(navController.graph.findStartDestination().id) {
+                            saveState = true
+                        }
+                        launchSingleTop = true
+                        restoreState = true
+                    }
                 })
             }
             composable(Screen.Cart.routes) {
-                val context = LocalContext.current
+
                 CartScreen( navigateBack = {
                     navController.navigateUp()
                 })
