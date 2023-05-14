@@ -1,6 +1,7 @@
 package com.affan.shopapp.ui.screen.order
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -10,6 +11,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Warning
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -42,6 +44,9 @@ fun OrderScreen(
     viewModel.uiState.collectAsState(initial = UiState.Loading).value.let { uiState ->
         when (uiState) {
             is UiState.Loading -> {
+                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                    CircularProgressIndicator()
+                }
                 viewModel.getOrders()
             }
 
@@ -88,7 +93,7 @@ fun OrderContent(
             LazyColumn(
                 modifier = modifier
                     .padding(values)
-                    .padding(16.dp)
+                    .padding(16.dp), verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
 
                 items(list) {
@@ -104,7 +109,7 @@ fun OrderContent(
         } else {
             Column(modifier = modifier.fillMaxSize(), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
     Icon(imageVector = Icons.Default.Warning , contentDescription = stringResource(R.string.warning_icon))
-                Text(text = "Belum Ada Transaksi")
+                Text(text = stringResource(R.string.empty_transaction))
             }
         }
     }

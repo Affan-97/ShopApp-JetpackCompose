@@ -34,7 +34,7 @@ fun ProfileScreen(
     ) {
         AsyncImage(
             model = "https://firebasestorage.googleapis.com/v0/b/bangkit-dashboard/o/production%2F2023-B1%2Fprofiles%2F79a87ee6-c23d-425b-919d-a0d6a7365bb4.jpeg?alt=media&token=9e26dbb1-5d55-4461-be0f-7a8ae44d80b2",
-            contentDescription = "User Image",
+            contentDescription = stringResource(R.string.user_image),
             modifier = Modifier
                 .size(300.dp)
                 .clip(shape = CircleShape)

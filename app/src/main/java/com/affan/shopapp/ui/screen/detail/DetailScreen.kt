@@ -1,7 +1,5 @@
 package com.affan.shopapp.ui.screen.detail
 
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -16,11 +14,11 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.ModalBottomSheetLayout
 import androidx.compose.material.ModalBottomSheetValue
-import androidx.compose.material.Surface
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.rememberModalBottomSheetState
 import androidx.compose.material3.Button
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -35,7 +33,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -83,6 +80,9 @@ fun DetailScreen(
     viewModel.uiState.collectAsState(initial = UiState.Loading).value.let { uiState ->
         when (uiState) {
             is UiState.Loading -> {
+                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                    CircularProgressIndicator()
+                }
                 viewModel.getDetail(id)
             }
 
@@ -137,7 +137,7 @@ fun DetailScreen(
 
 }
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterialApi::class)
+@OptIn( ExperimentalMaterialApi::class)
 @Composable
 fun DetailContent(
     image: String,
@@ -213,7 +213,7 @@ fun DetailContent(
                     }
 
                     Column(modifier = Modifier.fillMaxWidth()) {
-                        Text(text = "Description", fontSize = 16.sp, fontWeight = FontWeight.Bold)
+                        Text(text = stringResource(R.string.desc_title), fontSize = 16.sp, fontWeight = FontWeight.Bold)
                         Text(text = desc, textAlign = TextAlign.Justify)
                     }
                 }
@@ -227,7 +227,7 @@ fun DetailContent(
                         }
                     }
                 }, modifier = Modifier.fillMaxWidth(), shape = RoundedCornerShape(15.dp)) {
-                    Text(text = "Pesan")
+                    Text(text = stringResource(R.string.Order))
                 }
             }
         }

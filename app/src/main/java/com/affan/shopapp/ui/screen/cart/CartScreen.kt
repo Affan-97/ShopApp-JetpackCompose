@@ -1,10 +1,11 @@
 package com.affan.shopapp.ui.screen.cart
 
-import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
@@ -12,6 +13,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -49,13 +51,16 @@ fun CartScreen(
     viewModel.uiState.collectAsState(initial = UiState.Loading).value.let { uiState ->
         when (uiState) {
             is UiState.Loading -> {
+                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                    CircularProgressIndicator()
+                }
                 viewModel.getAddedCart()
             }
 
             is UiState.Success -> {
                 CartContent(
                     state = uiState.data,
-                    navigateDetail = {},
+
                     navigateBack = navigateBack,
                     deleteItem = { id -> viewModel.deleteProduct(id) },
                     onProductCountChanged = { id, qty ->
@@ -71,13 +76,13 @@ fun CartScreen(
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+
 @Composable
 fun CartContent(
     state: CartState,
     viewModel: CartViewModel,
     modifier: Modifier = Modifier,
-    navigateDetail: (Int) -> Unit,
+
     deleteItem: (Int) -> Unit,
     navigateBack: () -> Unit,
     onProductCountChanged: (id: Int, count: Int) -> Unit,
@@ -149,7 +154,7 @@ fun CartContent(
                     Text(text = convertCurency(state.totalPrice), fontWeight = FontWeight.Bold)
                 }
                 OrderButton(
-                    text = " Beli Sekarang",
+                    text = stringResource(R.string.Buy_now),
                     onClick = { viewModel.BoughtItem(state.listCartItem, state.totalPrice) }
                 )
 

@@ -13,4 +13,10 @@
     <string name="Name">Affan Abdullah Izzuddin</string>
     <string name="email">affana959@gmail.com</string>
     <string name="warning_icon">Warning Icon</string>
+    <string name="Buy_now">" Beli Sekarang"</string>
+    <string name="user_image">User Image</string>
+    <string name="empty_transaction">Belum Ada Transaksi</string>
+    <string name="Empty_product">Barang Kosong</string>
+    <string name="Order">Pesan</string>
+    <string name="desc_title">Description</string>
 </resources>
