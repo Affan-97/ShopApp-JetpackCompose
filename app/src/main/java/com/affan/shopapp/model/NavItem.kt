@@ -7,5 +7,6 @@ class NavItem(
     val title:String,
     val icon: ImageVector,
     val icon_focused: ImageVector,
+    val icon_desc: String,
     val screen: Screen
 )

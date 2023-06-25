@@ -26,12 +26,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
+import com.affan.shopapp.R
 import com.affan.shopapp.model.NavItem
 import com.affan.shopapp.ui.screen.Screen
 
@@ -39,22 +41,25 @@ import com.affan.shopapp.ui.screen.Screen
 fun BottomBar(navController: NavHostController) {
     val navItems = listOf(
         NavItem(
-            title = "Home",
+            title = stringResource(R.string.home_tag),
             icon = Icons.Default.Home,
             icon_focused = Icons.Outlined.Home,
+            icon_desc = stringResource(R.string.home_page),
             screen = Screen.Home
         ),
         NavItem(
-            title = "Transaction",
+            title = stringResource(R.string.transaction_tag),
             icon = Icons.Default.DateRange,
             icon_focused = Icons.Outlined.DateRange,
+            icon_desc = stringResource(R.string.transaction_page),
             screen = Screen.Transaction
         ),
 
         NavItem(
-            title = "Profile",
+            title = stringResource(R.string.profile_tag),
             icon = Icons.Default.AccountCircle,
             icon_focused = Icons.Outlined.AccountCircle,
+            icon_desc = stringResource(R.string.about_page),
             screen = Screen.Profile
         )
     )
@@ -112,7 +117,7 @@ fun BottomBarItem(
         ) {
             Icon(
                 imageVector = if (selected) navItem.icon_focused else navItem.icon,
-                contentDescription = "icon",
+                contentDescription = navItem.icon_desc,
                 tint = contentColor
             )
             AnimatedVisibility(visible = selected) {

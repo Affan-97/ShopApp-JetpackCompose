@@ -19,4 +19,10 @@
     <string name="Empty_product">Barang Kosong</string>
     <string name="Order">Pesan</string>
     <string name="desc_title">Description</string>
+    <string name="home_tag">Home</string>
+    <string name="home_page">home_page</string>
+    <string name="transaction_tag">Transaction</string>
+    <string name="transaction_page">transaction_page</string>
+    <string name="about_page">about_page</string>
+    <string name="profile_tag">Profile</string>
 </resources>

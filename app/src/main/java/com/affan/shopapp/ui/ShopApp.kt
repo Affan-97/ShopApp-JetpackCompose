@@ -35,7 +35,7 @@ fun ShopApp(
 
 
     Scaffold(bottomBar = {
-        if (currentRoute != Screen.Detail.routes || currentRoute!=Screen.Cart.routes) {
+        if (currentRoute == Screen.Home.routes || currentRoute==Screen.Transaction.routes || currentRoute==Screen.Profile.routes  ) {
             BottomBar(navController = navController)
         }
     }) { paddingValues ->
